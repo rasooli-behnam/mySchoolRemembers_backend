@@ -3,22 +3,23 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "dependencies": {
+    "@types/express": "^4.16.0",
+    "express": "^4.16.4"
+  },
+  "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ben-rasooli/mySchoolRemembers_backend.git"
+    "url": "git+https://github.com/rasooli-behnam/mySchoolRemembers_backend.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/ben-rasooli/mySchoolRemembers_backend/issues"
+    "url": "https://github.com/rasooli-behnam/mySchoolRemembers_backend/issues"
   },
-  "homepage": "https://github.com/ben-rasooli/mySchoolRemembers_backend#readme",
-  "dependencies": {
-    "@types/express": "^4.16.0",
-    "express": "^4.16.4"
-  }
+  "homepage": "https://github.com/rasooli-behnam/mySchoolRemembers_backend#readme"
 }
