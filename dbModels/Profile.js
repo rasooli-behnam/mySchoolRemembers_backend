@@ -37,7 +37,7 @@ const schema = mongoose.Schema({
       _id: false
     }
   ],
-  externalResources: [
+  external_resources: [
     {
       name: String,
       link: String,
