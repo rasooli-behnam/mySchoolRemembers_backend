@@ -1,9 +1,13 @@
+global.__rootdir = __dirname;
+require("dotenv").config();
+const debug = require("debug")("app_startup");
 const express = require("express");
+const morgan = require("morgan");
+
 const app = new express();
 
-app.get("/", (req, res) => {
-  res.send("an empty express app");
-});
+if (app.get("env") === "development") app.use(morgan("tiny"));
+app.use(express.json());
 
-var port = process.env.PORT || 3000;
-app.listen(port, console.log(`Listening on port ${port}...`));
+const port = process.env.PORT || 3000;
+app.listen(port, debug(`Listening on port ${port}...`));
