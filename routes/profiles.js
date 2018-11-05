@@ -114,4 +114,28 @@ router.put("/:id/external_resources", async (req, res) => {
   res.send(profile);
 });
 
+router.put("/:id/multimedias", async (req, res) => {
+  const { body } = req;
+  const { id } = req.params;
+
+  const profile = await Profile.findOneAndUpdate(
+    {
+      "bio.reg_no": id,
+      "bio.name": body.name
+    },
+    {
+      $push: { multimedias: { ...body.multimedia } }
+    },
+    {
+      new: true,
+      runValidators: true,
+      fields: "-_id -__v"
+    }
+  );
+
+  if (!profile) return res.sendStatus(404);
+
+  res.send(profile);
+});
+
 module.exports = router;
