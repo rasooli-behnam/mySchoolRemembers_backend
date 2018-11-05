@@ -42,4 +42,28 @@ router.post("/", async (req, res) => {
   res.send(savedProfile);
 });
 
+router.put("/:id/bio", async (req, res) => {
+  const { body } = req;
+  const { id } = req.params;
+
+  const profile = await Profile.findOneAndUpdate(
+    {
+      "bio.reg_no": id,
+      "bio.name": body.name
+    },
+    {
+      bio: { ...body, reg_no: id }
+    },
+    {
+      new: true,
+      runValidators: true,
+      fields: "-_id -__v"
+    }
+  );
+
+  if (!profile) return res.sendStatus(404);
+
+  res.send(profile);
+});
+
 module.exports = router;
