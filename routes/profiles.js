@@ -66,4 +66,28 @@ router.put("/:id/bio", async (req, res) => {
   res.send(profile);
 });
 
+router.put("/:id/events", async (req, res) => {
+  const { body } = req;
+  const { id } = req.params;
+
+  const profile = await Profile.findOneAndUpdate(
+    {
+      "bio.reg_no": id,
+      "bio.name": body.name
+    },
+    {
+      $push: { events: { ...body.event } }
+    },
+    {
+      new: true,
+      runValidators: true,
+      fields: "-_id -__v"
+    }
+  );
+
+  if (!profile) return res.sendStatus(404);
+
+  res.send(profile);
+});
+
 module.exports = router;

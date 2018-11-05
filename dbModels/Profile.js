@@ -33,13 +33,15 @@ const schema = mongoose.Schema({
     {
       name: String,
       date: String,
-      coords: { lat: Number, lon: Number }
+      coords: { lat: Number, lon: Number },
+      _id: false
     }
   ],
   externalResources: [
     {
       name: String,
-      link: String
+      link: String,
+      _id: false
     }
   ],
   multimedias: [
@@ -53,7 +55,8 @@ const schema = mongoose.Schema({
       type: {
         type: String,
         default: "image"
-      }
+      },
+      _id: false
     }
   ]
 });
