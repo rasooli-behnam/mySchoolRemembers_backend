@@ -11,7 +11,7 @@ router.put("/", async (req, res) => {
       "bio.name": body.name
     },
     {
-      bio: { ...body, reg_no: id }
+      bio: { ...body.bio, name: body.name, reg_no: id }
     },
     {
       new: true,
