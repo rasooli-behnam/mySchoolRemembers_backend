@@ -4,6 +4,7 @@ const debug = require("debug")("app_startup");
 const express = require("express");
 const mongoose = require("mongoose");
 const morgan = require("morgan");
+const { errors } = require("celebrate");
 
 const app = new express();
 
@@ -23,6 +24,8 @@ mongoose
   .catch(err => {
     console.log(err);
   });
+
+app.use(errors());
 
 const port = process.env.PORT || 3000;
 app.listen(port, debug(`Listening on port ${port}...`));
