@@ -4,14 +4,13 @@ const debug = require("debug")("app_startup");
 const express = require("express");
 const mongoose = require("mongoose");
 const morgan = require("morgan");
-const profilesRouter = require("./routes/profiles");
 
 const app = new express();
 
 if (app.get("env") === "development") app.use(morgan("tiny"));
 app.use(express.json());
 
-app.use("/api/profiles", profilesRouter);
+app.use("/api", require("./routes"));
 
 mongoose
   .connect(

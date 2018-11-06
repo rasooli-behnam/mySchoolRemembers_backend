@@ -1,7 +1,5 @@
-const express = require("express");
-const debug = require("debug")("app_db");
-const Profile = require(__rootdir + "/dbModels/Profile");
-const router = express.Router();
+const Profile = require(__rootdir + "/db_models/Profile");
+const router = require("express").Router();
 
 router.get("/", async (req, res) => {
   const profiles = await Profile.find(
@@ -37,105 +35,14 @@ router.post("/", async (req, res) => {
 
   const savedProfile = await profile.save();
 
-  if (!savedProfile) res.sendStatus(500);
+  if (!savedProfile) return res.sendStatus(500);
 
   res.send(savedProfile);
 });
 
-router.put("/:id/bio", async (req, res) => {
-  const { body } = req;
-  const { id } = req.params;
-
-  const profile = await Profile.findOneAndUpdate(
-    {
-      "bio.reg_no": id,
-      "bio.name": body.name
-    },
-    {
-      bio: { ...body, reg_no: id }
-    },
-    {
-      new: true,
-      runValidators: true,
-      fields: "-_id -__v"
-    }
-  );
-
-  if (!profile) return res.sendStatus(404);
-
-  res.send(profile);
-});
-
-router.put("/:id/events", async (req, res) => {
-  const { body } = req;
-  const { id } = req.params;
-
-  const profile = await Profile.findOneAndUpdate(
-    {
-      "bio.reg_no": id,
-      "bio.name": body.name
-    },
-    {
-      $push: { events: { ...body.event } }
-    },
-    {
-      new: true,
-      runValidators: true,
-      fields: "-_id -__v"
-    }
-  );
-
-  if (!profile) return res.sendStatus(404);
-
-  res.send(profile);
-});
-
-router.put("/:id/external_resources", async (req, res) => {
-  const { body } = req;
-  const { id } = req.params;
-
-  const profile = await Profile.findOneAndUpdate(
-    {
-      "bio.reg_no": id,
-      "bio.name": body.name
-    },
-    {
-      $push: { external_resources: { ...body.external_resource } }
-    },
-    {
-      new: true,
-      runValidators: true,
-      fields: "-_id -__v"
-    }
-  );
-
-  if (!profile) return res.sendStatus(404);
-
-  res.send(profile);
-});
-
-router.put("/:id/multimedias", async (req, res) => {
-  const { body } = req;
-  const { id } = req.params;
-
-  const profile = await Profile.findOneAndUpdate(
-    {
-      "bio.reg_no": id,
-      "bio.name": body.name
-    },
-    {
-      $push: { multimedias: { ...body.multimedia } }
-    },
-    {
-      new: true,
-      runValidators: true,
-      fields: "-_id -__v"
-    }
-  );
-
-  if (!profile) return res.sendStatus(404);
-
-  res.send(profile);
-});
+router.use("/:id/bio", require("./bio"));
+router.use("/:id/events", require("./events"));
+router.use("/:id/external_resources", require("./external_resources"));
+router.use("/:id/multimedias", require("./multimedias"));
 
 module.exports = router;
