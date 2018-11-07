@@ -1,7 +1,8 @@
 const Profile = require(__rootdir + "/db_models/Profile");
 const router = require("express").Router({ mergeParams: true });
+const req_validator = require(__rootdir + "/req_validators/events");
 
-router.put("/", async (req, res) => {
+router.put("/", req_validator, async (req, res) => {
   const { body } = req;
   const { id } = req.params;
 
