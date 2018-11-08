@@ -4,6 +4,9 @@ module.exports = celebrate({
   body: Joi.object()
     .keys({
       event: {
+        time_period: Joi.string()
+          .valid("Before War", "During War", "After War")
+          .required(),
         name: Joi.string()
           .min(1)
           .max(30)

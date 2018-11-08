@@ -32,6 +32,11 @@ const schema = mongoose.Schema({
   },
   events: [
     {
+      time_period: {
+        type: String,
+        enum: ["Before War", "During War", "After War"],
+        required: true
+      },
       name: String,
       date: String,
       coords: { lat: Number, lon: Number },
