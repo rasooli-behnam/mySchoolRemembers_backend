@@ -12,7 +12,8 @@ router.put("/", req_validator, async (req, res) => {
       "bio.name": body.name
     },
     {
-      $push: { events: { ...body.event } }
+      $push: { events: { ...body.event } },
+      $set: { available: true }
     },
     {
       new: true,

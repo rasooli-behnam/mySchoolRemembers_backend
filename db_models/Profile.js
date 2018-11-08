@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 
 const schema = mongoose.Schema({
+  available: Boolean,
   bio: {
     reg_no: {
       type: String,

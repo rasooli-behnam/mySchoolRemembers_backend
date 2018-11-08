@@ -4,12 +4,17 @@ const router = require("express").Router();
 router.get("/", async (req, res) => {
   const profiles = await Profile.find(
     null,
-    "bio.reg_no bio.name bio.coords -_id"
+    "available bio.reg_no bio.name bio.coords -_id"
   );
 
   res.send(
     profiles.map(p => {
-      return { reg_no: p.bio.reg_no, name: p.bio.name, coords: p.bio.coords };
+      return {
+        available: p.available,
+        reg_no: p.bio.reg_no,
+        name: p.bio.name,
+        coords: p.bio.coords
+      };
     })
   );
 });
@@ -27,6 +32,7 @@ router.get("/:id", async (req, res) => {
 
 router.post("/", async (req, res) => {
   const profile = new Profile({
+    available: false,
     bio: {
       reg_no: req.body.reg_no,
       name: req.body.name
