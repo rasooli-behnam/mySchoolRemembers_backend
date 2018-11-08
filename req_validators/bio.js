@@ -72,39 +72,39 @@ module.exports = celebrate({
         weight: Joi.string()
           .trim()
           .min(2)
-          .max(3)
-          .regex(/^[0-9]+$/),
+          .max(10)
+          .regex(/^[a-zA-Z0-9, ]+$/),
         next_of_kin: Joi.string()
           .trim()
           .max(600)
-          .regex(/^[a-zA-Z0-9_\-,\\/ ]+$/),
+          .regex(/^[a-zA-Z0-9_\-,.\\/ ]+$/),
         prev_military_service: Joi.string()
           .trim()
           .max(100)
-          .regex(/^[a-zA-Z0-9_\-,\\/ ]+$/),
+          .regex(/^[a-zA-Z0-9_\-,.\\/ ]+$/),
         enlist_date: Joi.string()
           .required()
-          .regex(/^([12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]))$/),
+          .regex(/^[a-zA-Z0-9_\-,.\\/ ]+$/),
         rank: Joi.string()
           .trim()
           .max(100)
-          .regex(/^[a-zA-Z0-9_\-,\\/ ]+$/),
+          .regex(/^[a-zA-Z0-9_\-,.\\/ ]+$/),
         unit: Joi.string()
           .trim()
           .max(100)
-          .regex(/^[a-zA-Z0-9_\-,\\/ ]+$/),
+          .regex(/^[a-zA-Z0-9_\-,.\\/ ]+$/),
         AWM_embark_roll_no: Joi.string()
           .trim()
           .max(100)
-          .regex(/^[a-zA-Z0-9_\-,\\/ ]+$/),
+          .regex(/^[a-zA-Z0-9_\-,.\\/ ]+$/),
         embark_details: Joi.string()
           .trim()
           .max(400)
-          .regex(/^[a-zA-Z0-9_\-,\\/ ]+$/),
-        summery: Joi.string()
+          .regex(/^[a-zA-Z0-9_\-,.\\/ ]+$/),
+        summary: Joi.string()
           .trim()
           .max(400)
-          .regex(/^[a-zA-Z0-9_\-,\\/ ]+$/)
+          .regex(/^[a-zA-Z0-9_\-,.\\/ ]+$/)
       }
     })
     .unknown()
