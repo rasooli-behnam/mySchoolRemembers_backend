@@ -1,5 +1,5 @@
 {
-  "name": "mySchoolRemembers_backend",
+  "name": "myschoolremembers_backend",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -13,14 +13,14 @@
   },
   "devDependencies": {},
   "scripts": {
+    "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/rasooli-behnam/mySchoolRemembers_backend.git"
   },
-  "keywords": [],
-  "author": "",
+  "author": "Behnam Rasooli",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/rasooli-behnam/mySchoolRemembers_backend/issues"
