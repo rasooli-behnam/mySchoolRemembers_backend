@@ -14,9 +14,18 @@ const schema = mongoose.Schema({
     religion: String,
     occupation: String,
     street: String,
-    city: String,
-    state: String,
-    postcode: String,
+    city: {
+      type: String,
+      index: true
+    },
+    state: {
+      type: String,
+      index: true
+    },
+    postcode: {
+      type: String,
+      index: true
+    },
     coords: { lat: Number, lon: Number },
     age_at_embark: String,
     height: String,
