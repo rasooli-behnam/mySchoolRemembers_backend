@@ -82,9 +82,7 @@ module.exports = celebrate({
           .trim()
           .max(100)
           .regex(/^[a-zA-Z0-9_\-,.\\/ ]+$/),
-        enlist_date: Joi.string()
-          .required()
-          .regex(/^[a-zA-Z0-9_\-,.\\/ ]+$/),
+        enlist_date: Joi.string().regex(/^[a-zA-Z0-9_\-,.\\/ ]+$/),
         rank: Joi.string()
           .trim()
           .max(100)
