@@ -1,5 +1,6 @@
 global.__rootdir = __dirname;
 require("dotenv").config();
+const cors = require("cors");
 const debug = require("debug")("app_startup");
 const express = require("express");
 const mongoose = require("mongoose");
@@ -10,6 +11,12 @@ const app = new express();
 
 if (app.get("env") === "development") app.use(morgan("tiny"));
 app.use(express.json());
+
+var corsOptions = {
+  origin: "http://my-school-remembers-frontend.appspot.com",
+  optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+};
+app.use(cors(corsOptions));
 
 app.use("/api", require("./routes"));
 
@@ -27,5 +34,5 @@ mongoose
 
 app.use(errors());
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 8080;
 app.listen(port, debug(`Listening on port ${port}...`));
