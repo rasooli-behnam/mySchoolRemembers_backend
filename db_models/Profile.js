@@ -9,7 +9,11 @@ const schema = mongoose.Schema({
       unique: true
     },
     photo: String,
-    name: String,
+    name: {
+      type: String,
+      required: true,
+      index: true
+    },
     place_of_birth: String,
     religion: String,
     occupation: String,
