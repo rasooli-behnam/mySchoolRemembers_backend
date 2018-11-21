@@ -53,6 +53,10 @@ const schema = mongoose.Schema({
       name: String,
       date: String,
       coords: { lat: Number, lon: Number },
+      zoom: {
+        type: Number,
+        default: 7
+      },
       _id: false
     }
   ],
