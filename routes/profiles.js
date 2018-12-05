@@ -1,28 +1,5 @@
 const Profile = require(__rootdir + "/db_models/Profile");
 const router = require("express").Router();
-const req_validator = require(__rootdir + "/req_validators/query_profiles");
-
-// querystring should be provided: /api/profiles?filterBy=value&condition=value
-router.get("/", req_validator, async (req, res) => {
-  const filterBy = `bio.${req.query.filterBy}`;
-  const condition = req.query.condition;
-
-  const profiles = await Profile.find(
-    { [filterBy]: condition },
-    "available bio.reg_no bio.name bio.coords -_id"
-  );
-
-  res.send(
-    profiles.map(p => {
-      return {
-        available: p.available,
-        reg_no: p.bio.reg_no,
-        name: p.bio.name,
-        coords: p.bio.coords
-      };
-    })
-  );
-});
 
 router.get("/:id", async (req, res) => {
   const profile = await Profile.findOne(
