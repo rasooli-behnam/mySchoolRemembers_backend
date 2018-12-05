@@ -4,6 +4,10 @@ module.exports = celebrate({
   body: Joi.object()
     .keys({
       bio: {
+        alias: Joi.string()
+          .max(60)
+          .trim()
+          .regex(/^[a-zA-Z_, ]+$/),
         photo: Joi.string()
           .trim()
           .max(400)
@@ -12,6 +16,12 @@ module.exports = celebrate({
           .trim()
           .max(100)
           .regex(/^[a-zA-Z0-9_\-, ]+$/),
+        date_of_birth: Joi.string()
+          .max(20)
+          .regex(/^[a-zA-Z0-9_\-,.\\/ ]+$/),
+        date_of_death: Joi.string()
+          .max(20)
+          .regex(/^[a-zA-Z0-9_\-,.\\/ ]+$/),
         religion: Joi.string()
           .trim()
           .max(100)
@@ -20,6 +30,14 @@ module.exports = celebrate({
           .trim()
           .max(100)
           .regex(/^[a-zA-Z_\- ]+$/),
+        marital_status: Joi.string()
+          .max(60)
+          .trim()
+          .regex(/^[a-zA-Z ]+$/),
+        fate: Joi.string()
+          .trim()
+          .max(400)
+          .regex(/^[a-zA-Z0-9_\-,.\\/ ]+$/),
         street: Joi.string()
           .trim()
           .max(100)
@@ -53,14 +71,6 @@ module.exports = celebrate({
           .positive()
           .min(1000)
           .max(9999),
-        coords: {
-          lat: Joi.number()
-            .min(-90)
-            .max(90),
-          lon: Joi.number()
-            .min(-180)
-            .max(180)
-        },
         age_at_embark: Joi.string()
           .trim()
           .min(2)
@@ -82,12 +92,10 @@ module.exports = celebrate({
           .trim()
           .max(100)
           .regex(/^[a-zA-Z0-9_\-,.\\/ ]+$/),
-        enlist_date: Joi.string().regex(/^[a-zA-Z0-9_\-,.\\/ ]+$/),
-        rank: Joi.string()
-          .trim()
-          .max(100)
+        enlist_date: Joi.string()
+          .max(20)
           .regex(/^[a-zA-Z0-9_\-,.\\/ ]+$/),
-        unit: Joi.string()
+        rank: Joi.string()
           .trim()
           .max(100)
           .regex(/^[a-zA-Z0-9_\-,.\\/ ]+$/),
