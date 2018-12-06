@@ -4,15 +4,11 @@ const req_validator = require(__rootdir + "/req_validators/events");
 
 router.put("/", req_validator, async (req, res) => {
   const { body } = req;
-  const { id } = req.params;
 
-  const profile = await Profile.findOneAndUpdate(
+  const profile = await Profile.findByIdAndUpdate(
+    req.params.id,
     {
-      "bio.reg_no": id,
-      "bio.name": body.name
-    },
-    {
-      $push: { events: { ...body.event } },
+      $push: { events: { ...body } },
       $set: { available: true }
     },
     {

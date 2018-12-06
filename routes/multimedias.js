@@ -3,15 +3,11 @@ const router = require("express").Router({ mergeParams: true });
 
 router.put("/", async (req, res) => {
   const { body } = req;
-  const { id } = req.params;
 
-  const profile = await Profile.findOneAndUpdate(
+  const profile = await Profile.findByIdAndUpdate(
+    req.params.id,
     {
-      "bio.reg_no": id,
-      "bio.name": body.name
-    },
-    {
-      $push: { multimedias: { ...body.multimedia } }
+      $push: { multimedias: { ...body } }
     },
     {
       new: true,

@@ -3,9 +3,12 @@ require("dotenv").config();
 const cors = require("cors");
 const debug = require("debug")("app_startup");
 const express = require("express");
+const Joi = require("joi");
 const mongoose = require("mongoose");
 const morgan = require("morgan");
 const { errors } = require("celebrate");
+
+Joi.objectId = require("joi-objectid")(Joi);
 
 const app = new express();
 

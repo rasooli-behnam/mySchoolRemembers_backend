@@ -1,10 +1,12 @@
 const Profile = require(__rootdir + "/db_models/Profile");
 const router = require("express").Router();
+const req_validator_post = require(__rootdir + "/req_validators/profiles_post");
+const req_validator_id = require(__rootdir + "/req_validators/profiles");
 
-router.get("/:id", async (req, res) => {
+router.get("/", async (req, res) => {
   const profile = await Profile.findOne(
-    { "bio.reg_no": req.params.id },
-    "-_id -__v"
+    { "bio.reg_no": req.body.reg_no, "bio.battalion": req.body.battalion },
+    "-__v"
   );
 
   if (!profile) return res.sendStatus(404);
@@ -12,11 +14,20 @@ router.get("/:id", async (req, res) => {
   res.send(profile);
 });
 
-router.post("/", async (req, res) => {
+router.get("/:id", req_validator_id, async (req, res) => {
+  const profile = await Profile.findById(req.params.id, "-__v");
+
+  if (!profile) return res.sendStatus(404);
+
+  res.send(profile);
+});
+
+router.post("/", req_validator_post, async (req, res) => {
   const profile = new Profile({
     available: false,
     bio: {
       reg_no: req.body.reg_no,
+      battalion: req.body.battalion,
       name: req.body.name
     }
   });
@@ -28,9 +39,13 @@ router.post("/", async (req, res) => {
   res.send(savedProfile);
 });
 
-router.use("/:id/bio", require("./bio"));
-router.use("/:id/events", require("./events"));
-router.use("/:id/external_resources", require("./external_resources"));
-router.use("/:id/multimedias", require("./multimedias"));
+router.use("/:id/bio", req_validator_id, require("./bio"));
+router.use("/:id/events", req_validator_id, require("./events"));
+router.use(
+  "/:id/external_resources",
+  req_validator_id,
+  require("./external_resources")
+);
+router.use("/:id/multimedias", req_validator_id, require("./multimedias"));
 
 module.exports = router;

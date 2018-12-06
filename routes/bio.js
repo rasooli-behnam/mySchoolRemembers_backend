@@ -6,16 +6,12 @@ const req_validator = require(__rootdir + "/req_validators/bio");
 
 router.put("/", req_validator, async (req, res) => {
   const { body } = req;
-  const { id } = req.params;
 
-  const profile = await Profile.findOne({
-    "bio.reg_no": id,
-    "bio.name": body.name
-  });
+  const profile = await Profile.findById(req.params.id);
 
   if (!profile) return res.sendStatus(404);
 
-  profile.bio = merge(profile.bio, body.bio);
+  profile.bio = merge(profile.bio, body);
 
   const savedProfile = await profile.save();
 
