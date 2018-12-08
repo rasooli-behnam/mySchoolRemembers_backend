@@ -5,7 +5,7 @@ const req_validator_id = require(__rootdir + "/req_validators/profiles");
 
 router.get("/", async (req, res) => {
   const profile = await Profile.findOne(
-    { "bio.reg_no": req.body.reg_no, "bio.battalion": req.body.battalion },
+    { "bio.reg_no": req.query.reg_no, "bio.battalion": req.query.battalion },
     "-__v"
   );
 
